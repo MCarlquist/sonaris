@@ -1,5 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { getRecordings } from '@/lib/recordings';
+import { ChordAnalysisPanel } from "@/components/audio/ChordAnalysisPanel";
 
 export const Route = createFileRoute('/recordings')({
   loader: () => getRecordings(),
@@ -31,9 +32,9 @@ function RecordingsPage() {
           {recordings.map((recording) => (
             <div
               key={recording.id}
-              className="rounded-lg border p-4"
+              className="space-y-4 border-b pb-4 last:border-b-0"
             >
-              <div className="flex items-center justify-between">
+              <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
                 <div>
                   <h2 className="font-medium">
                     {recording.title}
@@ -49,6 +50,8 @@ function RecordingsPage() {
                   src={recording.audioUrl}
                 />
               </div>
+
+              <ChordAnalysisPanel recording={recording} />
             </div>
           ))}
         </div>
